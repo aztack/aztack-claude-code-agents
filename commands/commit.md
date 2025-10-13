@@ -163,7 +163,7 @@ git status --short
 **Process:**
 1. Look up `redesign-api-auth` files
 2. Add specific files
-3. Commit with breaking change indicator (`!`)
+3. Commit with breaking change indicator (exclamation mark after scope)
 4. Add `BREAKING CHANGE:` footer if needed
 
 **Commit Message:**

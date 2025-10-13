@@ -215,7 +215,7 @@ feat(module): create new module with initial implementation
 ```
 
 **Breaking Changes:**
-Add `BREAKING CHANGE:` in commit body or use `!` after type/scope:
+Add `BREAKING CHANGE:` in commit body or use exclamation mark after type/scope:
 ```
 feat(api)!: redesign authentication flow
 

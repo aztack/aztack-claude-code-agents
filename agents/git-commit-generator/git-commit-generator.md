@@ -84,6 +84,35 @@ Provide the exact commit message text ready for use:
 - Trigger the full analysis and generation process
 - Use provided diff or fetch with `git diff`
 - Generate complete structured output
+- Do not commit anything until user request with `/commit <name>`
+
+Here is an example of output:
+```md
+project-shared: // Shared module should list at the top
+create-shared-module:
+feat: Create project-shared package, which contains shared types (auth, mode, task, user) and utility functions (diff, auth, safeParse).
+- apps/project-shared/src/index.ts
+- apps/project-shared/src/types/auth.ts
+- apps/project-shared/src/utils/index.ts
+
+project-api (backend): // Backend API should list before frontend modules
+
+support-batch-invitation-in-org:
+feat(api): In organization management, support batch invitation of members.
+- apps/project-api/controller/org.ts:60
+
+pagination-in-modes:
+feat(api): Add pagination to /marketplace/modes and /task/search interfaces.
+- apps/project-api/controller/marketplace.ts:83
+- apps/project-api/controller/task.ts:108
+
+project-frontend (fontend): // Frontend modules should list after backend modules
+feat(fontend): Create project-frontend package, which contains ...
+- apps/project-frontend/src/index.ts
+- apps/project-frontend/src/types/auth.ts
+- apps/project-frontend/src/utils/index.ts
+
+```
 
 **`/commit <name> <type>(<new_scope>): <new_msg>`**:
 - Commit ONLY files associated with `<name>` from your classification

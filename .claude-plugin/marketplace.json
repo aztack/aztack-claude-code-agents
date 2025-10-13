@@ -30,7 +30,11 @@
       ],
       "category": "development",
       "strict": false,
-      "commands": [],
+      "commands": [
+        "./commands/commit_message.md",
+        "./commands/commit.md",
+        "./commands/commit_all.md"
+      ],
       "agents": [
         "./agents/git-commit-generator/git-commit-generator.md"
       ]

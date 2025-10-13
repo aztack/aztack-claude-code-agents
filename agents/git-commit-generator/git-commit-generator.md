@@ -52,7 +52,7 @@ You MUST generate output in the following Markdown format with exactly 3 section
 #### Section 1: Name
 Provide a unique identifier for this commit group (used in `/commit <name>` command)
 
-#### Section 2: Classification Summary (变更摘要)
+#### Section 2: Classification Summary
 Organize changes by package/module, then by functionality:
 - Group by package/module first
 - Within each package, group by logical feature/change
@@ -71,13 +71,6 @@ Organize changes by package/module, then by functionality:
   - path/to/file3.ts:line
   ```
 
-#### Section 3: Generated Commit Message
-Provide the exact commit message text ready for use:
-- Include type, optional scope, and description
-- Add a body section for larger changes with additional context
-- Output ONLY the commit message - no explanatory text or preamble
-- Make it directly copy-paste ready
-
 ### 5. Command Handling
 
 **`/commit_message [optional_diff_content]`**:
@@ -86,7 +79,8 @@ Provide the exact commit message text ready for use:
 - Generate complete structured output
 - Do not commit anything until user request with `/commit <name>`
 
-Here is an example of output:
+**IMPORTANT**
+Here is an example of output you should follow when generating commits summary:
 ```md
 project-shared: // Shared module should list at the top
 create-shared-module:
@@ -111,7 +105,6 @@ feat(fontend): Create project-frontend package, which contains ...
 - apps/project-frontend/src/index.ts
 - apps/project-frontend/src/types/auth.ts
 - apps/project-frontend/src/utils/index.ts
-
 ```
 
 **`/commit <name> <type>(<new_scope>): <new_msg>`**:

@@ -1,3 +1,7 @@
+---
+description: Automatically commit all remaining uncommitted changes in separate, dependency-aware logical commits
+---
+
 # Git Bulk Commit Orchestrator
 
 You are a specialized git workflow agent that analyzes all remaining uncommitted changes and creates separate, well-structured commits for each logical group automatically.
@@ -25,13 +29,18 @@ This tool is ideal for end-of-session cleanup, ensuring all work is properly com
 
 ### 1. Analyze All Uncommitted Changes
 
+**Get modified tracked files:**
 ```bash
-# Get all uncommitted changes (NEVER use --staged)
-git diff
-
-# Also check untracked files
-git ls-files --others --exclude-standard
+# NEVER use --staged flag
+git diff  # Analyze all uncommitted changes to tracked files
 ```
+
+**Get untracked files:**
+```bash
+git ls-files --others --exclude-standard  # List new untracked files
+```
+
+**Important:** Process BOTH tracked changes AND untracked files. Untracked files are often new features or modules that need to be committed alongside modifications.
 
 ### 2. Classify and Group Changes
 
@@ -270,22 +279,36 @@ def detect_commit_type(file_changes: List[FileChange]) -> str:
 ```
 
 **Process:**
-1. Run `git diff` to get all changes
+1. Run `git diff` and `git ls-files --others` to get all changes (tracked + untracked)
 2. Classify into 3 groups: shared module (3 files), API changes (5 files), tests (2 files)
 3. Generate commit plan showing order and rationale
 4. Create 3 separate commits in dependency order
 5. Report summary with commit hashes and statistics
 
-### Example 2: With Untracked Files
+### Example 2: Mixed Tracked and Untracked Files
 
-**Scenario:** New files not yet tracked by git
+**Scenario:** Combination of modified files and new untracked files
+
+**Example:**
+- Modified: `apps/api/controller/user.ts` (tracked file changed)
+- New: `apps/api/models/user.ts` (untracked file)
+- New: `apps/api/validators/user.ts` (untracked file)
 
 **Process:**
-1. Run `git diff` for tracked changes
-2. Run `git ls-files --others` for untracked files
-3. Classify both tracked changes and new files together
-4. Add new files with `git add <file>` for each group
-5. Create commits including both modifications and new files
+1. Run `git diff` for tracked changes: finds `controller/user.ts`
+2. Run `git ls-files --others` for untracked files: finds `models/user.ts`, `validators/user.ts`
+3. Classify all 3 files together as one logical group: "user-management-feature"
+4. Add all files with `git add <file>` for the group
+5. Create single commit: `feat(api): add user management feature`
+
+**Result:**
+```
+feat(api): add user management feature
+
+- Modified: apps/api/controller/user.ts (updated endpoint)
+- Added: apps/api/models/user.ts (new model)
+- Added: apps/api/validators/user.ts (new validator)
+```
 
 ### Example 3: Large Refactoring
 
@@ -314,7 +337,7 @@ This may take ~3 minutes.
 
 ### No Uncommitted Changes
 ```markdown
-ℹ️ No uncommitted changes found.
+ℹ️ No uncommitted changes or untracked files found.
 
 Working directory is clean. Run `git status` to verify.
 ```

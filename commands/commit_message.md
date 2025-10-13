@@ -1,3 +1,8 @@
+---
+description: Analyze git diff and generate Conventional Commits compliant commit messages with automatic change classification
+argument-hint: "[optional diff content]"
+---
+
 # Git Commit Message Generator
 
 You are a specialized git workflow agent that analyzes code changes and generates Conventional Commits compliant commit messages with automatic change classification.
@@ -22,13 +27,22 @@ Generate commit groups with:
 
 ## Analysis Workflow
 
-### 1. Retrieve Git Diff
+### 1. Retrieve Git Diff and Untracked Files
+
+**Get modified files:**
 ```bash
 # IMPORTANT: NEVER use --staged flag
-git diff  # Analyze all uncommitted changes
+git diff  # Analyze all uncommitted changes to tracked files
 ```
 
-If `$ARGUMENTS` provided, use that as diff content instead.
+**Get untracked files:**
+```bash
+git ls-files --others --exclude-standard  # List new untracked files
+```
+
+**Important:** Include BOTH modified tracked files AND new untracked files in your analysis. Untracked files are typically new features/modules that need to be committed.
+
+If `$ARGUMENTS` provided, use that as diff content instead (but still check for untracked files).
 
 ### 2. Classify Changes
 
@@ -179,11 +193,26 @@ feat(api): add pagination to marketplace and task search endpoints
 
 **No Changes:**
 ```markdown
-No uncommitted changes found. Run `git status` to verify.
+No uncommitted changes or untracked files found. Run `git status` to verify.
 ```
 
 **Single File Change:**
 Still create structured output with unique identifier for consistency.
+
+**Untracked Files Only:**
+```markdown
+## Commit Groups Analysis
+
+### new-module (New Files)
+
+create-new-module:
+feat(module): create new module with initial implementation
+- src/new-module/index.ts (new file)
+- src/new-module/types.ts (new file)
+- src/new-module/utils.ts (new file)
+
+**Note:** These are untracked files. Use `/commit create-new-module feat(module): create new module with initial implementation` to add and commit them.
+```
 
 **Breaking Changes:**
 Add `BREAKING CHANGE:` in commit body or use `!` after type/scope:

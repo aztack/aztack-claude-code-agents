@@ -1,3 +1,8 @@
+---
+description: Commit specific file groups identified by commit message generator with custom commit messages
+argument-hint: "<unique-identifier> <type>(<scope>): <description>"
+---
+
 # Git Commit Executor for Specific File Groups
 
 You are a specialized git workflow agent that commits specific file groups identified by the commit message generator, ensuring precise and atomic commits.
@@ -50,13 +55,17 @@ Extract file paths:
 
 ### 3. Stage Files Selectively
 
-**IMPORTANT:** Add ONLY the files associated with this commit group.
+**IMPORTANT:** Add ONLY the files associated with this commit group. This works for BOTH tracked and untracked files.
 
 ```bash
-# ✅ CORRECT: Add specific files only
+# ✅ CORRECT: Add specific files only (works for tracked and untracked files)
 git add apps/project-shared/src/index.ts
 git add apps/project-shared/src/types/auth.ts
 git add apps/project-shared/src/utils/index.ts
+
+# Note: git add works the same for both:
+# - Modified tracked files (already in repository)
+# - New untracked files (not yet in repository)
 
 # ❌ WRONG: Never do this
 git add .
@@ -106,9 +115,9 @@ git status --short
 📝 Commit: a1b2c3d feat(shared): create shared module for types and utils
 
 📋 Remaining uncommitted changes:
-- apps/project-api/controller/org.ts
-- apps/project-api/controller/marketplace.ts
-- apps/project-api/controller/task.ts
+- M apps/project-api/controller/org.ts (modified)
+- M apps/project-api/controller/marketplace.ts (modified)
+- ?? src/new-feature/index.ts (untracked)
 
 🔄 Remaining commit groups:
 - support-batch-invitation: feat(api): add batch invitation support

@@ -1,0 +1,39 @@
+{
+  "name": "aztack-claude-code-agents",
+  "owner": {
+    "name": "Wang Weihua",
+    "email": "aztack@163.com",
+    "url": "https://github.com/aztack"
+  },
+  "metadata": {
+    "description": "Aztack's Personal Claude Code Agents",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "git-commit-generator",
+      "source": "./",
+      "description": "Professional Git workflow agent that analyzes code diffs and generates Conventional Commits compliant commit messages with automatic change classification",
+      "version": "1.0.0",
+      "author": {
+        "name": "Wang Weihua",
+        "url": "https://github.com/aztack"
+      },
+      "homepage": "https://github.com/aztack/claude-code-agents",
+      "repository": "https://github.com/aztack/claude-code-agents",
+      "license": "MIT",
+      "keywords": [
+        "git",
+        "commit",
+        "conventional-commits",
+        "workflow"
+      ],
+      "category": "development",
+      "strict": false,
+      "commands": [],
+      "agents": [
+        "./agents/git-commit-generator/git-commit-generator.md"
+      ]
+    }
+  ]
+}

@@ -60,7 +60,7 @@ A professional Git workflow agent that analyzes code changes and generates [Conv
 git clone https://github.com/aztack/claude-code-agents.git
 
 # Link to Claude Code agents directory (adjust path as needed)
-ln -s $(pwd)/claude-code-agents ~/.claude/agents/aztack-agents
+ln -s $(pwd)/aztack-claude-code-agents ~/.claude/agents/aztack-claude-code-agents
 ```
 
 ### From Claude Code Marketplace
@@ -76,8 +76,7 @@ aztack-claude-code-agents/
 ├── .claude-plugin/
 │   └── marketplace.json          # Plugin marketplace configuration
 ├── agents/
-│   └── git-commit-generator/
-│       └── git-commit-generator.md
+│   └── git-commit-generator.md
 ├── CLAUDE.md                      # Development guidance for Claude Code
 └── README.md
 ```
@@ -107,7 +106,7 @@ aztack-claude-code-agents/
    ```json
    {
      "agents": [
-       "./agents/my-new-agent/my-new-agent.md"
+       "./agents/my-new-agent.md"
      ]
    }
    ```

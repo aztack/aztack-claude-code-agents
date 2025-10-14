@@ -62,7 +62,7 @@ The `.claude-plugin/marketplace.json` file registers all agents and follows this
       "category": "...",
       "strict": false,
       "commands": [],
-      "agents": ["./agents/agent-name/agent-name.md"]
+      "agents": ["./agents/agent-name.md"]
     }
   ]
 }
@@ -73,12 +73,12 @@ The `.claude-plugin/marketplace.json` file registers all agents and follows this
 When creating a new agent:
 
 1. Create a new directory under `agents/` with the agent name (kebab-case)
-2. Create the agent definition file: `agents/{agent-name}/{agent-name}.md`
+2. Create the agent definition file: `agents/{agent-name}.md`
 3. Add YAML frontmatter with `name`, `description`, and `model` fields
 4. Write the agent's system prompt in the markdown body
 5. Update `.claude-plugin/marketplace.json`:
    - Add a new plugin entry or add to existing plugin's `agents` array
-   - Include the path: `./agents/{agent-name}/{agent-name}.md`
+   - Include the path: `./agents/{agent-name}.md`
    - Set appropriate metadata: description, keywords, category
 
 ## Existing Agents

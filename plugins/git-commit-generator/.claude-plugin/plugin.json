@@ -1,0 +1,9 @@
+{
+  "name": "git-commit-generator",
+  "description": "Professional Git workflow agent that analyzes code diffs and generates Conventional Commits compliant commit messages with automatic change classification",
+  "version": "1.0.0",
+  "author": {
+    "name": "Aztack",
+    "email": "aztack@163.com"
+  }
+}

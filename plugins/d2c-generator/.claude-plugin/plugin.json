@@ -1,0 +1,9 @@
+{
+  "name": "d2c-generator",
+  "description": "This agent, specializing in UI development with Semi Design, transforms UI design images into high-quality, production-ready React components. It analyzes UI mockups, identifies layout structures, and generates corresponding components and styles.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Aztack",
+    "email": "aztack@163.com"
+  }
+}

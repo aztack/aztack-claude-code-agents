@@ -12,7 +12,7 @@
   "plugins": [
     {
       "name": "git-commit-generator",
-      "source": "./agents/git-commit-generator",
+      "source": "./plugins/git-commit-generator",
       "description": "Professional Git workflow agent that analyzes code diffs and generates Conventional Commits compliant commit messages with automatic change classification",
       "version": "1.0.0",
       "author": {
@@ -29,19 +29,11 @@
         "workflow"
       ],
       "category": "development",
-      "strict": false,
-      "commands": [
-        "./commands/commit_message.md",
-        "./commands/commit.md",
-        "./commands/commit_all.md"
-      ],
-      "agents": [
-        "./agents/git-commit-generator.md"
-      ]
+      "strict": false
     },
     {
       "name": "d2c-generator",
-      "source": "./agents/d2c-generator",
+      "source": "./plugins/d2c-generator",
       "description": "This agent, specializing in UI development with Semi Design, transforms UI design images into high-quality, production-ready React components. It analyzes UI mockups, identifies layout structures, and generates corresponding components and styles.",
       "version": "1.0.0",
       "author": {
@@ -58,14 +50,7 @@
         "semi-design"
       ],
       "category": "development",
-      "strict": false,
-      "commands": [
-        "./commands/ocr.md",
-        "./commands/implComponents.md"
-      ],
-      "agents": [
-        "./agents/d2c-generator.md"
-      ]
+      "strict": false
     }
   ]
 }

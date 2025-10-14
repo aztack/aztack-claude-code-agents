@@ -38,6 +38,36 @@
       "agents": [
         "./agents/git-commit-generator/git-commit-generator.md"
       ]
+    },
+    {
+      "name": "d2c-generator",
+      "source": "./",
+      "description": "This agent, specializing in UI development with Semi Design, transforms UI design images into high-quality, production-ready React components. It analyzes UI mockups, identifies layout structures, and generates corresponding components and styles.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Wang Weihua",
+        "url": "https://github.com/aztack"
+      },
+      "homepage": "https://github.com/aztack/claude-code-agents",
+      "repository": "https://github.com/aztack/claude-code-agents",
+      "license": "MIT",
+      "keywords": [
+        "ui",
+        "react",
+        "component-generator",
+        "semi-design"
+      ],
+      "category": "development",
+      "strict": false,
+      "commands": [
+        "./commands/ocr.md",
+        "./commands/implComponents.md",
+        "./commands/extractComponent.md",
+        "./commands/extractCommonComponents.md"
+      ],
+      "agents": [
+        "./agents/d2c-generator/d2c-generator.md"
+      ]
     }
   ]
 }

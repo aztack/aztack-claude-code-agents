@@ -3,7 +3,9 @@
     "allow": [
       "Bash(cat:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "WebSearch",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []

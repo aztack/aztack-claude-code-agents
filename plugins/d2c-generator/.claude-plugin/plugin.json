@@ -5,5 +5,17 @@
   "author": {
     "name": "Aztack",
     "email": "aztack@163.com"
-  }
+  },
+  "homepage": "https://github.com/aztack/aztack-claude-code-agents",
+  "repository": "https://github.com/aztack/aztack-claude-code-agents",
+  "license": "MIT",
+  "keywords": ["ui", "react", "component-generator", "semi-design"],
+  "category": "development",
+  "commands": [
+    "./commands/ocr.md",
+    "./commands/implComponents.md"
+  ],
+  "agents": [
+    "./agents/d2c-generator.md"
+  ]
 }

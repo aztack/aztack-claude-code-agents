@@ -51,6 +51,67 @@ A professional Git workflow agent that analyzes code changes and generates [Conv
 > /commit_all
 ```
 
+### knowledge-researcher
+
+A specialized agent for recursively searching and extracting knowledge from markdown documentation by following internal links. Perfect for navigating complex documentation structures and finding specific information across interconnected files.
+
+**Key Features:**
+- Intelligent entry point detection (`.llms-txt`, `docs/`, `README.md`)
+- Recursive link traversal with circular reference prevention
+- Relevance-based result ranking (High/Medium/Low)
+- Context extraction with link chain tracking
+- Read-only operation ensuring safe documentation exploration
+- Fallback strategies with user confirmation for expanded searches
+
+**Usage:**
+
+```bash
+# Search with specific entry file
+/research authentication API in docs/api/readme.md
+
+# Search from default documentation root
+/research database migrations
+
+# Search with quoted phrases
+/research "error handling" in docs/guide.md
+```
+
+**Example Workflow:**
+
+```bash
+# 1. Search for specific topic
+> /research JWT token validation in docs/security/auth.md
+
+# Agent recursively follows markdown links and returns:
+# - Relevance-ranked findings
+# - Source paths with link chains
+# - Search statistics (files searched, links followed)
+
+# 2. If nothing found, agent asks for permission to expand search
+# Agent: "No results found. Search from root documentation?"
+> Yes
+
+# 3. Agent expands search to .llms-txt and presents comprehensive results
+```
+
+### agent-creator
+
+A meta-agent that guides you through creating new agents for this repository. Streamlines the agent development workflow with automated scaffolding and quality checks.
+
+**Key Features:**
+- Interactive requirements gathering
+- Automated file generation with proper YAML frontmatter
+- Marketplace.json registration
+- Consistency validation across all references
+- Follows established patterns from existing agents
+
+**Usage:**
+
+```bash
+# Launch the agent creator
+Can you help me create a new agent for [specific purpose]?
+```
+
 ## Installation
 
 ### From GitHub
@@ -73,10 +134,26 @@ Search for "aztack-claude-code-agents" or "git-commit-generator" in the Claude C
 
 ```
 aztack-claude-code-agents/
+├── .claude/
+│   └── agents/
+│       └── agent-creator.md      # Meta-agent for creating new agents
 ├── .claude-plugin/
 │   └── marketplace.json          # Plugin marketplace configuration
-├── agents/
-│   └── git-commit-generator.md
+├── plugins/
+│   ├── git-commit-generator/
+│   │   ├── agents/
+│   │   │   └── git-commit-generator.md
+│   │   └── commands/
+│   │       ├── commit.md
+│   │       ├── commit_all.md
+│   │       └── commit_message.md
+│   ├── knowledge-researcher/
+│   │   ├── agents/
+│   │   │   └── knowledge-researcher.md
+│   │   └── commands/
+│   │       └── research.md
+│   └── d2c-generator/
+│       └── ...
 ├── CLAUDE.md                      # Development guidance for Claude Code
 └── README.md
 ```
@@ -85,9 +162,26 @@ aztack-claude-code-agents/
 
 ### Adding New Agents
 
-1. Create a new directory under `agents/` with kebab-case naming:
+**Automated Approach (Recommended):**
+
+Use the `agent-creator` meta-agent to streamline the process:
+
+```bash
+# In Claude Code conversation
+Can you help me create a new agent for [specific purpose]?
+```
+
+The agent-creator will:
+- Gather requirements interactively
+- Generate proper file structure with YAML frontmatter
+- Register the agent in marketplace.json
+- Validate consistency across all references
+
+**Manual Approach:**
+
+1. Create a new directory under `plugins/` with kebab-case naming:
    ```bash
-   mkdir -p agents/my-new-agent
+   mkdir -p plugins/my-new-agent/{agents,commands}
    ```
 
 2. Create the agent definition file with YAML frontmatter:
@@ -102,11 +196,27 @@ aztack-claude-code-agents/
    [Agent system prompt and instructions here]
    ```
 
-3. Update `.claude-plugin/marketplace.json` to register the agent:
+3. Create command files if needed (optional):
+   ```bash
+   # plugins/my-new-agent/commands/my_command.md
+   ---
+   description: Command description
+   argument-hint: "<args>"
+   ---
+
+   [Command implementation]
+   ```
+
+4. Update `.claude-plugin/marketplace.json` to register the plugin:
    ```json
    {
-     "agents": [
-       "./agents/my-new-agent.md"
+     "plugins": [
+       {
+         "name": "my-new-agent",
+         "source": "./plugins/my-new-agent",
+         "agents": ["./agents/my-new-agent.md"],
+         "commands": ["./commands/my_command.md"]
+       }
      ]
    }
    ```
@@ -117,6 +227,9 @@ Test agents directly in Claude Code using the Task tool:
 ```bash
 # In Claude Code conversation
 Can you use the git-commit-generator agent to analyze my changes?
+
+# Or test slash commands
+/research "authentication" in docs/
 ```
 
 ## Contributing
@@ -148,9 +261,25 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## Changelog
 
+### v1.1.0 (Latest)
+
+- Added **knowledge-researcher** agent for recursive documentation search
+  - Intelligent entry point detection and link traversal
+  - Relevance-based ranking with context extraction
+  - Read-only safe operation with fallback strategies
+- Added **agent-creator** meta-agent for streamlined agent development
+  - Interactive requirements gathering
+  - Automated scaffolding and validation
+  - Marketplace registration and consistency checks
+- Reorganized repository structure with `plugins/` directory
+- Enhanced development workflow documentation
+
 ### v1.0.0 (Initial Release)
 
-- Added git-commit-generator agent with full Conventional Commits support
+- Added **git-commit-generator** agent with full Conventional Commits support
+  - `/commit_message` - Analyze and generate commit messages
+  - `/commit` - Commit specific change groups
+  - `/commit_all` - Bulk commit all remaining changes
 - Established repository structure and development guidelines
 - Created marketplace configuration for distribution
 

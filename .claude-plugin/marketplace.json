@@ -51,6 +51,30 @@
       ],
       "category": "development",
       "strict": false
+    },
+    {
+      "name": "knowledge-researcher",
+      "source": "./plugins/knowledge-researcher",
+      "description": "A specialized agent for recursively searching and extracting knowledge from markdown documentation by following internal links. Perfect for navigating complex documentation structures and finding specific information across interconnected files.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Wang Weihua",
+        "url": "https://github.com/aztack"
+      },
+      "homepage": "https://github.com/aztack/aztack-claude-code-agents",
+      "repository": "https://github.com/aztack/aztack-claude-code-agents",
+      "license": "MIT",
+      "keywords": [
+        "documentation",
+        "search",
+        "research",
+        "markdown",
+        "knowledge-base",
+        "recursive-search",
+        "docs-navigation"
+      ],
+      "category": "productivity",
+      "strict": false
     }
   ]
 }

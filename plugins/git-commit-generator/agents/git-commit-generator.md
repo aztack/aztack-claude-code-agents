@@ -146,3 +146,55 @@ Before outputting:
 - If scope is ambiguous, check git history for patterns
 
 Your goal is to make the commit process efficient, accurate, and compliant with best practices. Every commit message you generate should be production-ready and require minimal user modification.
+
+
+## 9. Unsaved Changes Detection
+User may install vscode-editor-info extension. You can query for unsaved changed with sending a request to http://127.0.0.1:<port>/tabs and find any isSaved field is false.
+
+The port is 57235 by default. If there is a vs-editor-info.json in workspace, the port will be read from it.
+
+Here is how to query vscode-editor-info from an external agent (curl examples)
+
+
+Base URL
+- Default: http://127.0.0.1:<port>
+- If an API key is configured, include header: x-vscode-editor-info-key: <KEY>
+  (Alternative: append ?key=<KEY> to the URL.)
+
+Discover endpoints
+- curl -s http://127.0.0.1:<port>/
+  Returns an HTML index with links to all available endpoints.
+
+Health check
+- curl -s http://127.0.0.1:<port>/health
+
+Editor & Tabs
+- curl -s http://127.0.0.1:<port>/tabs
+- curl -s http://127.0.0.1:<port>/active-editor
+- curl -s http://127.0.0.1:<port>/editors/visible
+
+Workspace
+- curl -s http://127.0.0.1:<port>/workspace
+- curl -s http://127.0.0.1:<port>/workspace/folders
+- curl -s http://127.0.0.1:<port>/workspace/documents
+
+Diagnostics & Problems
+- curl -s http://127.0.0.1:<port>/diagnostics
+- curl -s http://127.0.0.1:<port>/diagnostics/summary
+- curl -s "http://127.0.0.1:<port>/diagnostics/top?limit=10"
+
+Other useful endpoints
+- Git:         curl -s http://127.0.0.1:<port>/git/summary
+- Debug:       curl -s http://127.0.0.1:<port>/debug/session
+- Terminals:   curl -s http://127.0.0.1:<port>/terminals
+- Tasks:       curl -s http://127.0.0.1:<port>/tasks
+- Symbols:     curl -s http://127.0.0.1:<port>/symbols/active
+- Extensions:  curl -s http://127.0.0.1:<port>/extensions
+- Commands:    curl -s "http://127.0.0.1:<port>/commands?limit=200"
+- Environment: curl -s http://127.0.0.1:<port>/env
+- Theme:       curl -s http://127.0.0.1:<port>/theme
+- Activity:    curl -s "http://127.0.0.1:<port>/activity/recent?windowMs=300000"
+
+Notes
+- By default, responses omit full file paths/URIs for privacy. A user can opt in via setting: vscodeEditorInfo.includeFileUri = true.
+- Prefer header auth; if you must embed via query use ?key=<KEY>.

@@ -310,6 +310,7 @@ This command enables precise, atomic commits by:
 **Prerequisites:**
 - Must run `/commit_message` first to generate commit groups
 - Must use exact unique identifier from analysis output
+- Run unsaved changes detection before commit. Ask user to save all unsaved changes before committing.
 
 **Best Practices:**
 - Commit shared/common modules first

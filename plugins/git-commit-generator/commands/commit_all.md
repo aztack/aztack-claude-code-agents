@@ -482,6 +482,7 @@ This command automates the process of committing all remaining changes by:
 - Organizing accumulated changes before creating a pull request
 
 **Prerequisites:**
+- Run unsaved changes detection before commit. Ask user to save all unsaved changes before committing.
 - Uncommitted changes exist in working directory
 - No merge conflicts or rebase in progress
 - Pre-commit hooks are properly configured

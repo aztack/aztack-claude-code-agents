@@ -10,7 +10,6 @@
   "repository": "https://github.com/aztack/aztack-claude-code-agents",
   "license": "MIT",
   "keywords": ["ui", "react", "component-generator", "semi-design"],
-  "category": "development",
   "commands": [
     "./commands/ocr.md",
     "./commands/implComponents.md"

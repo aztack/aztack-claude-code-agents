@@ -10,7 +10,6 @@
   "repository": "https://github.com/aztack/aztack-claude-code-agents",
   "license": "MIT",
   "keywords": ["git", "commit", "conventional-commits", "workflow"],
-  "category": "development",
   "commands": [
     "./commands/commit_message.md",
     "./commands/commit.md",
